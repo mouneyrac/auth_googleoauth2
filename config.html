@@ -1,0 +1,245 @@
+<?php
+	// set to defaults if undefined
+	if (!isset($config->googleclientid)) {
+		$config->googleclientid = '';
+	}
+	if (!isset($config->googleclientsecret)) {
+		$config->googleclientsecret = '';
+	}
+	if (!isset ($config->facebookclientid)) {
+		$config->facebookclientid = '';
+	}
+	if (!isset ($config->facebookclientsecret)) {
+		$config->facebookclientsecret = '';
+	}
+	if (!isset ($config->messengerclientid)) {
+		$config->messengerclientid = '';
+	}
+	if (!isset ($config->messengerclientsecret)) {
+		$config->messengerclientsecret = '';
+	}
+	if (!isset ($config->githubclientid)) {
+		$config->githubclientid = '';
+	}
+	if (!isset ($config->githubclientsecret)) {
+		$config->githubclientsecret = '';
+	}
+	if (!isset ($config->linkedinclientid)) {
+		$config->linkedinclientid = '';
+	}
+	if (!isset ($config->linkedinclientsecret)) {
+		$config->linkedinclientsecret = '';
+	}
+	if (!isset($config->googleipinfodbkey)) {
+		$config->googleipinfodbkey = '';
+	}
+	if (!isset($config->googleuserprefix)) {
+		$config->googleuserprefix = 'social_user_';
+	}
+
+$yesno = array( get_string('no'), get_string('yes') );
+
+?>
+
+<table cellspacing="0" cellpadding="5" border="0">
+	<tr>
+		<td colspan="3">
+			<h2 class="main">
+				<?php print_string('auth_googlesettings', 'auth_googleoauth2'); ?>
+			</h2>
+		</td>
+	</tr>
+	<!-- Google client id -->
+	<tr>
+		<td align="right">
+			<label for="googleclientid">
+				<?php print_string('auth_googleclientid_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'googleclientid', 'name' => 'googleclientid', 'class' => 'googleclientid', 'value' => $config->googleclientid)); ?>
+			<?php if (isset($err["googleclientid"])) { echo $OUTPUT->error_text($err["googleclientid"]); } ?>
+		</td>
+		<td>
+			<?php $parse = parse_url($CFG->wwwroot); ?>
+			<?php print_string('auth_googleclientid', 'auth_googleoauth2', array('jsorigins' => $parse['scheme'].'://'.$parse['host'], 'redirecturls' => $CFG->wwwroot . '/auth/googleoauth2/google_redirect.php')); ?>
+		</td>
+	</tr>
+	<!-- Google client secret -->
+	<tr>
+		<td align="right">
+			<label for="googleclientsecret">
+				<?php print_string('auth_googleclientsecret_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'googleclientsecret', 'name' => 'googleclientsecret', 'class' => 'googleclientsecret', 'value' => $config->googleclientsecret)); ?>
+			<?php if (isset($err["googleclientsecret"])) { echo $OUTPUT->error_text($err["googleclientsecret"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_googleclientsecret', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<!-- Facebook client id -->
+	<tr>
+		<td align="right">
+			<label for="facebookclientid">
+				<?php print_string('auth_facebookclientid_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'facebookclientid', 'name' => 'facebookclientid', 'class' => 'facebookclientid', 'value' => $config->facebookclientid)); ?>
+			<?php if (isset($err["facebookclientid"])) { echo $OUTPUT->error_text($err["facebookclientid"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_facebookclientid', 'auth_googleoauth2', (object) array('siteurl' => $CFG->wwwroot . '/auth/googleoauth2/facebook_redirect.php', 'sitedomain' => $parse['host'])); ?>
+		</td>
+	</tr>
+	<!-- Facebook client secret -->
+	<tr>
+		<td align="right">
+			<label for="facebookclientsecret">
+				<?php print_string('auth_facebookclientsecret_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'facebookclientsecret', 'name' => 'facebookclientsecret', 'class' => 'facebookclientsecret', 'value' => $config->facebookclientsecret)); ?>
+			<?php if (isset($err["facebookclientsecret"])) { echo $OUTPUT->error_text($err["facebookclientsecret"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_facebookclientsecret', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<!-- Messenger client id -->
+	<tr>
+		<td align="right">
+			<label for="messengerclientid">
+				<?php print_string('auth_messengerclientid_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'messengerclientid', 'name' => 'messengerclientid', 'class' => 'messengerclientid', 'value' => $config->messengerclientid)); ?>
+			<?php if (isset($err["messengerclientid"])) { echo $OUTPUT->error_text($err["messengerclientid"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_messengerclientid', 'auth_googleoauth2', (object) array('domain' => $CFG->wwwroot)); ?>
+		</td>
+	</tr>
+	<!-- Messenger client secret -->
+	<tr>
+		<td align="right">
+			<label for="messengerclientsecret">
+				<?php print_string('auth_messengerclientsecret_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'messengerclientsecret', 'name' => 'messengerclientsecret', 'class' => 'messengerclientsecret', 'value' => $config->messengerclientsecret)); ?>
+			<?php if (isset($err["messengerclientsecret"])) { echo $OUTPUT->error_text($err["messengerclientsecret"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_messengerclientsecret', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<!-- Github client id -->
+	<tr>
+		<td align="right">
+			<label for="githubclientid">
+				<?php print_string('auth_githubclientid_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'githubclientid', 'name' => 'githubclientid', 'class' => 'githubclientid', 'value' => $config->githubclientid)); ?>
+			<?php if (isset($err["githubclientid"])) { echo $OUTPUT->error_text($err["githubclientid"]);} ?>
+		</td>
+		<td>
+			<?php print_string('auth_githubclientid', 'auth_googleoauth2', (object) array('callbackurl' => $CFG->wwwroot . '/auth/googleoauth2/github_redirect.php', 'siteurl' => $CFG->wwwroot)); ?>
+		</td>
+	</tr>
+	<!-- Github client secret -->
+	<tr>
+		<td align="right">
+			<label for="githubclientsecret">
+				<?php print_string('auth_githubclientsecret_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'githubclientsecret', 'name' => 'githubclientsecret', 'class' => 'githubclientsecret', 'value' => $config->githubclientsecret)); ?>
+			<?php if (isset($err["githubclientsecret"])) { echo $OUTPUT->error_text($err["githubclientsecret"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_githubclientsecret', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<!-- Linkedin client id -->
+	<tr>
+		<td align="right">
+			<label for="linkedinclientid">
+				<?php print_string('auth_linkedinclientid_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'linkedinclientid', 'name' => 'linkedinclientid', 'class' => 'linkedinclientid', 'value' => $config->linkedinclientid)); ?>
+			<?php if (isset($err["linkedinclientid"])) { echo $OUTPUT->error_text($err["linkedinclientid"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_linkedinclientid', 'auth_googleoauth2', (object) array('callbackurl' => $CFG->wwwroot . '/auth/googleoauth2/linkedin_redirect.php', 'siteurl' => $CFG->wwwroot)); ?>
+		</td>
+	</tr>
+	<!-- Linkedin client secret -->
+	<tr>
+		<td align="right">
+			<label for="linkedinclientsecret">
+				<?php print_string('auth_linkedinclientsecret_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'linkedinclientsecret', 'name' => 'linkedinclientsecret', 'class' => 'linkedinclientsecret', 'value' => $config->linkedinclientsecret)); ?>
+			<?php if (isset($err["linkedinclientsecret"])) { echo $OUTPUT->error_text($err["linkedinclientsecret"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_linkedinclientsecret', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<!-- IPinfoDB -->
+	<tr>
+		<td align="right">
+			<label for="googleipinfodbkey">
+				<?php print_string('auth_googleipinfodbkey_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'googleipinfodbkey', 'name' => 'googleipinfodbkey', 'class' => 'googleipinfodbkey', 'value' => $config->googleipinfodbkey)); ?>
+			<?php if (isset($err["googleipinfodbkey"])) { echo $OUTPUT->error_text($err["googleipinfodbkey"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_googleipinfodbkey', 'auth_googleoauth2', (object) array('website' => $CFG->wwwroot)); ?>
+		</td>
+	</tr>
+	<!-- User prefix -->
+	<tr>
+		<td align="right">
+			<label for="googleuserprefix">
+				<?php print_string('auth_googleuserprefix_key', 'auth_googleoauth2'); ?>
+			</label>
+		</td>
+		<td>
+			<?php echo html_writer::empty_tag('input', array('type' => 'text', 'id' => 'googleuserprefix', 'name' => 'googleuserprefix', 'class' => 'googleuserprefix', 'value' => $config->googleuserprefix)); ?>
+			<?php if (isset($err["googleuserprefix"])) { echo $OUTPUT->error_text($err["googleuserprefix"]); } ?>
+		</td>
+		<td>
+			<?php print_string('auth_googleuserprefix', 'auth_googleoauth2'); ?>
+		</td>
+	</tr>
+	<?php 
+        	// Block field options Hidden email options - email must be set to: locked
+        	echo html_writer::empty_tag('input', array('type' => 'hidden', 'value' => 'locked', 'name' => 'lockconfig_field_lock_email'));
+        	// display other field options
+        	foreach ($user_fields as $key => $user_field) {
+                	if ($user_field == 'email') {
+                        	unset($user_fields[$key]);
+                	}
+        	}
+        	print_auth_lock_options('googleoauth2', $user_fields, get_string('auth_fieldlocks_help', 'auth'), false, false);
+	?>
+</table>
+
