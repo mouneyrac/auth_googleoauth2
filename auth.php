@@ -254,7 +254,7 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                         $params['v'] = '5.9';
                         $api_raw_responce = $curl->get('https://api.vk.com/method/users.get',$params);
                         $vk_user = json_decode($curl->get('https://api.vk.com/method/users.get',$params))->response["0"];
-                        if ($vk_user->id != "") {
+                        if ($vk_user->id) {
                            $useremail = 'id'.$vk_user->id.'@vkmessenger.com';
                         };
                         $verified = 1;			
@@ -399,6 +399,13 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                     }
 
                     complete_user_login($user);
+
+                    // Create event for authenticated user.
+                    $event = \auth_googleoauth2\event\user_loggedin::create(
+                        array('context'=>context_system::instance(),
+                            'objectid'=>$user->id, 'relateduserid'=>$user->id,
+                            'other'=>array('accesstoken' => $accesstoken)));
+                    $event->trigger();
 
                     // Redirection
                     if (user_not_fully_set_up($USER)) {
