@@ -36,7 +36,7 @@ function auth_googleoauth2_get_state_token() {
         $state = md5(rand());
         $_SESSION['STATETOKEN'] = $state;
     }
-    return $_SESSION['STATETOKEN'];    
+    return $_SESSION['STATETOKEN'];
 }
 
 /**
@@ -104,7 +104,7 @@ function auth_googleoauth2_display_buttons() {
      $displayprovider = ((empty($authprovider) || $authprovider == 'messenger' || $allauthproviders) && get_config('auth/googleoauth2', 'messengerclientid'));
      $providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
      echo '<div class="singinprovider" style="'. $providerdisplaystyle .'">
-             <a class="zocial windows" href="https://oauth.live.com/authorize?client_id='. get_config('auth/googleoauth2', 'messengerclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/messenger_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=wl.basic wl.emails wl.signin&response_type=code">
+            <a class="zocial windows" href="https://oauth.live.com/authorize?client_id='. get_config('auth/googleoauth2', 'messengerclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/messenger_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=wl.basic wl.emails wl.signin&response_type=code">
                 Sign-in with Windows Live
             </a>
         </div>
