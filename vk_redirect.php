@@ -16,5 +16,4 @@ if (!empty($CFG->alternateloginurl)) {
 }
 $url = new moodle_url($loginurl, array('code' => $code, 'authprovider' => 'vk'));
 redirect($url);
-#die($url);
 ?>
