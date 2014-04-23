@@ -216,14 +216,21 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                         $params['access_token'] = $accesstoken;
                         $postreturnvalues = $curl->get('https://api.github.com/user', $params);
                         $githubuser = json_decode($postreturnvalues);
+                        // Use the final version of the API v3.
+                        // Recomendation on https://developer.github.com/v3/media/
+                        // See https://developer.github.com/v3/versions/#v3
+                        $curl->setHeader('Accept: application/vnd.github.v3+json');
                         $useremails = json_decode($curl->get('https://api.github.com/user/emails', $params));
+                        $useremail = '';
+                        $verified = 0;
                         // get first valid email
-                        foreach ($useremails as $useremail) {
-                            if (!empty($useremail) && $useremail == clean_param($useremail, PARAM_EMAIL)) {
+                        foreach ($useremails as $email) {
+                            if ($email->verified && $email->email == clean_param($email->email, PARAM_EMAIL)) {
+                                $useremail = $email->email;
+                                $verified = (int)$email->verified;
                                 break;
                             }
                         }
-                        $verified = 1; // The field will be available in the final version of the API v3.
                         break;
 
                     case 'linkedin':
