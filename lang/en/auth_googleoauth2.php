@@ -75,3 +75,10 @@ $string['emailaddressmustbeverified'] = 'Your email address is not verified by t
 $string['moreproviderlink'] = 'Sign-in with another service.';
 $string['signinwithanaccount'] = 'Log in with:';
 $string['noaccountyet'] = 'You do not have permission to use the site yet. Please contact your administrator and ask them to activate your account.';
+
+/* Login button translations */
+$string['button_google'] = 'Sign-in with Google';
+$string['button_facebook'] = 'Sign-in with Facebook';
+$string['button_github'] = 'Sign-in with Github';
+$string['button_linkedin'] = 'Sign-in with Linkedin';
+$string['button_windows'] = 'Sign-in with Windows Live';
