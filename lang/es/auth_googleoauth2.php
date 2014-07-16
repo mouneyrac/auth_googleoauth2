@@ -24,21 +24,21 @@
  */
 
 $string['pluginname'] = 'Oauth2';
-$string['auth_facebookclientid'] = 'Your App ID/Secret can be generated in your <a href="https://developers.facebook.com/apps/">Facebook developer page</a>:
-<br/>Site URL: {$a->siteurl}
-<br/>Site domain: {$a->sitedomain}';
+$string['auth_facebookclientid'] = 'Tu App ID/Secreto puede ser generado en tu <a href="https://developers.facebook.com/apps/">página de desarrollador de Facebook</a>:
+<br/>Sitio URL: {$a->siteurl}
+<br/>Sitio del dominio: {$a->sitedomain}';
 $string['auth_facebookclientid_key'] = 'Facebook App ID';
-$string['auth_facebookclientsecret'] = 'See above.';
-$string['auth_facebookclientsecret_key'] = 'Facebook App secret';
-$string['auth_githubclientid'] = 'Your client ID/Secret can be generated in your <a href="https://github.com/settings/applications/new">Github register application page</a>:
-<br/>Homepage URL: {$a->siteurl}
-<br/>Authorization callback URL: {$a->callbackurl}';
-$string['auth_githubclientid_key'] = 'Github client ID';
-$string['auth_githubclientsecret'] = 'See above.';
-$string['auth_githubclientsecret_key'] = 'Github client secret';
-$string['auth_googleclientid'] = 'Your client ID/Secret can be generated in the <a href="https://code.google.com/apis/console">Google console API</a>:
+$string['auth_facebookclientsecret'] = 'Ver arriba.';
+$string['auth_facebookclientsecret_key'] = 'Facebook App secreto';
+$string['auth_githubclientid'] = 'Tu ID cliente/Secreto puede ser generado en tu <a href="https://github.com/settings/applications/new">página de solicitud de registro en Github</a>:
+<br/>Página de inicio URL: {$a->siteurl}
+<br/>Callback URL de autorización: {$a->callbackurl}';
+$string['auth_githubclientid_key'] = 'Github ID ciente';
+$string['auth_githubclientsecret'] = 'Ver arriba.';
+$string['auth_githubclientsecret_key'] = 'Github secreto cliente';
+$string['auth_googleclientid'] = 'Tu ID cliente/Secreto puede ser generado en tu <a href="https://code.google.com/apis/console">consola de Google API</a>:
 <br/>
-Google console API > API Access > Create another client ID...
+Google console API > API Acceso > Crear otro ID cliente...
 <br/>
 Redirect URLs: {$a->redirecturls}
 <br/>
@@ -72,7 +72,7 @@ $string['oauth2displaybuttons'] = 'Display buttons on login page';
 $string['oauth2displaybuttonshelp'] = 'Display the Google/Facebook/... logo buttons on the top of the login page. If you want to position the buttons yourself in your login page, you can keep this option disabled and add the following code:
 {$a}';
 $string['emailaddressmustbeverified'] = 'Your email address is not verified by the authentication method you selected. You likely have forgotten to click on a "verify email address" link that Google or Facebook should have sent you during your subscribtion to their service.';
-$string['auth_sign-in_with'] = 'Sign-in with';
-$string['moreproviderlink'] = 'Sign-in with another service.';
-$string['signinwithanaccount'] = 'Log in with:';
-$string['noaccountyet'] = 'You do not have permission to use the site yet. Please contact your administrator and ask them to activate your account.';
+$string['auth_sign-in_with'] = 'Iniciar sesión con';
+$string['moreproviderlink'] = 'Iniciar sesión con otro servicio.';
+$string['signinwithanaccount'] = 'Iniciar sesión con:';
+$string['noaccountyet'] = 'Todavía no tienes permiso para utilizar este sitio. Contacte con tu administrador y pidele que active tu cuenta.';
