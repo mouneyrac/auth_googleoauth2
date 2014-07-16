@@ -1,6 +1,6 @@
 <?php
 // This file is part of Oauth2 authentication plugin for Moodle.
-//
+// 
 // Oauth2 authentication plugin for Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -80,7 +80,7 @@ function auth_googleoauth2_render_buttons() {
 	$html .= '<div class="singinprovider" style="' . $providerdisplaystyle .'">
             <a class="zocial googleplus" href="https://accounts.google.com/o/oauth2/auth?client_id='.
 	            get_config('auth/googleoauth2', 'googleclientid') .'&redirect_uri='.$CFG->wwwroot .'/auth/googleoauth2/google_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&response_type=code">
-                Sign-in with Google
+                '.get_string('auth_sign-in_with','auth_googleoauth2').' Google
             </a>
         </div>';
 	
@@ -88,7 +88,7 @@ function auth_googleoauth2_render_buttons() {
 	$providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
 	$html .= '<div class="singinprovider" style="'. $providerdisplaystyle .'">
             <a class="zocial facebook" href="https://www.facebook.com/dialog/oauth?client_id='. get_config('auth/googleoauth2', 'facebookclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/facebook_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=email&response_type=code">
-                Sign-in with Facebook
+                '.get_string('auth_sign-in_with','auth_googleoauth2').' Facebook
             </a>
         </div>';
 	
@@ -96,7 +96,7 @@ function auth_googleoauth2_render_buttons() {
 	$providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
 	$html .= '<div class="singinprovider" style="'. $providerdisplaystyle .'">
             <a class="zocial github" href="https://github.com/login/oauth/authorize?client_id='. get_config('auth/googleoauth2', 'githubclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/github_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=user:email&response_type=code">
-                Sign-in with Github
+                '.get_string('auth_sign-in_with','auth_googleoauth2').' Github
             </a>
         </div>';
 	
@@ -104,7 +104,7 @@ function auth_googleoauth2_render_buttons() {
 	$providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
 	$html .= '<div class="singinprovider" style="'. $providerdisplaystyle .'">
             <a class="zocial linkedin" href="https://www.linkedin.com/uas/oauth2/authorization?client_id='. get_config('auth/googleoauth2', 'linkedinclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/linkedin_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=r_basicprofile%20r_emailaddress&response_type=code">
-                Sign-in with Linkedin
+                '.get_string('auth_sign-in_with','auth_googleoauth2').' Linkedin
             </a>
         </div>';
 	
@@ -113,19 +113,20 @@ function auth_googleoauth2_render_buttons() {
 	$providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
 	$html .= '<div class="singinprovider" style="'. $providerdisplaystyle .'">
             <a class="zocial windows" href="https://oauth.live.com/authorize?client_id='. get_config('auth/googleoauth2', 'messengerclientid') .'&redirect_uri='. $CFG->wwwroot .'/auth/googleoauth2/messenger_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=wl.basic wl.emails wl.signin&response_type=code">
-                Sign-in with Windows Live
+                '.get_string('auth_sign-in_with','auth_googleoauth2').' Windows Live
             </a>
         </div>
     </div>';
 	
-	if (!empty($authprovider) and !$allauthproviders) {
-		$html .= '<br /><br />
-            <div class="moreproviderlink">
+	if (!empty($authprovider) and (count($allauthproviders))>1) {
+		$html .= '<br /><br /> 
+           <div class="moreproviderlink">
                 <a href="'. $CFG->wwwroot . (!empty($CFG->alternateloginurl) ? $CFG->alternateloginurl : '/login/index.php') . '?allauthproviders=true' .'" onclick="changecss(\'singinprovider\',\'display\',\'inline-block\');">
                     '. get_string('moreproviderlink', 'auth_googleoauth2').'
                 </a>
             </div>';
 	}
+
 	$html .= "</center>";	
 	return $html;
 }
