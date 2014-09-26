@@ -90,3 +90,4 @@ $string['auth_sign-in_with'] = 'Sign-in with';
 $string['moreproviderlink'] = 'Sign-in with another service.';
 $string['signinwithanaccount'] = 'Log in with:';
 $string['noaccountyet'] = 'You do not have permission to use the site yet. Please contact your administrator and ask them to activate your account.';
+$string['signin'] = 'Sign-in with {$a}';
