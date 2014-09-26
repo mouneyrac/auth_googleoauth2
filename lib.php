@@ -67,11 +67,17 @@ function auth_googleoauth2_render_buttons() {
 	global $CFG;
 	$html ='';
 	
+	// Do not display buttons if the auth method is not enabled
+	if (!is_enabled_auth('googleoauth2')) {
+        return $html;
+    }
+
+
 	$html .= '
     <script language="javascript">
         linkElement = document.createElement("link");
         linkElement.rel = "stylesheet";
-        linkElement.href = "' . $CFG->wwwroot . '/auth/googleoauth2/csssocialbuttons/css/zocial.css";
+        linkElement.href = "' . $CFG->httpswwwroot . '/auth/googleoauth2/csssocialbuttons/css/zocial.css";
         document.head.appendChild(linkElement);
     </script>
     ';
@@ -92,7 +98,7 @@ function auth_googleoauth2_render_buttons() {
     $providerscount = 0;
     $providerisenabled = get_config('auth/googleoauth2', 'googleclientid');
     $providerscount = $providerisenabled?$providerscount+1:$providerscount;
-	$displayprovider = ((empty($authprovider) || $authprovider == 'google' || $allauthproviders) && $providerisenabled);
+	$displayprovider = ((empty($authprovider) || $authprovider == 'google' || $allauthproviders) && get_config('auth/googleoauth2', 'googleclientid') && get_config('auth/googleoauth2', 'googleclientsecret'));
 	$providerdisplaystyle = $displayprovider?'display:inline-block;padding:10px;':'display:none;';
 	$html .= '<div class="singinprovider" style="' . $providerdisplaystyle .'">
             <a class="zocial googleplus" href="https://accounts.google.com/o/oauth2/auth?client_id='.
