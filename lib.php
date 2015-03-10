@@ -101,7 +101,7 @@ function auth_googleoauth2_render_buttons() {
 	$html .= '<div class="singinprovider" style="' . $providerdisplaystyle .'">
             <a class="zocial googleplus" href="https://accounts.google.com/o/oauth2/auth?client_id='.
 	            get_config('auth/googleoauth2', 'googleclientid') .'&redirect_uri='.$CFG->wwwroot .'/auth/googleoauth2/google_redirect.php&state='.auth_googleoauth2_get_state_token().'&scope=profile email&response_type=code">
-                '.get_string('auth_sign-in_with','auth_googleoauth2', $a).'
+                '.get_string('auth_sign-in_ucm','auth_googleoauth2', $a).'
             </a>
         </div>';
 

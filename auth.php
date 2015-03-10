@@ -84,6 +84,47 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
     function can_change_password() {
         return false;
     }
+	
+	/**
+	 * Return true if can create new account
+	 *
+	 * @return bool
+	 */
+	 function can_create_new_account() {
+		 $oauth2notcreatenewuser = get_config('auth/googleoauth2', 'oauth2notcreatenewuser');
+		 return ($oauth2notcreatenewuser != 1);
+	 }
+	 
+	
+	/**
+	 * Return true if the email domain is validate
+	 *
+	 * @return bool
+	*/
+	 function email_auth_domain($email) {
+		$auth_domain = get_config('auth/googleoauth2', 'oauth2authdomain');
+        if (!empty($auth_domain)) {
+            $allowed = explode(',', $auth_domain);
+            foreach ($allowed as $allowedpattern) {
+                $allowedpattern = trim($allowedpattern);
+				echo $allowedpattern."<br>";
+                if (!$allowedpattern) {
+                    continue;
+                }
+                if (strpos($allowedpattern, '.') === 0) {
+                    if (strpos(strrev($email), strrev($allowedpattern)) === 0) {
+                        // Subdomains are in a form ".example.com" - matches "xxx@anything.example.com".
+                        return true;
+                    }
+
+                } else if (strpos(strrev($email), strrev('@'.$allowedpattern)) === 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Authentication hook - is called every time user hit the login page
@@ -262,6 +303,12 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                 if ($err = email_is_not_allowed($useremail)) {
                    throw new moodle_exception($err, 'auth_googleoauth2');
                 }
+				
+				// Check login if email belongs to authorized domain
+				if (!$this->email_auth_domain($useremail)) {
+					$err = get_string('emailnotallowed', 'auth_googleoauth2');
+					throw new moodle_exception($err);
+				}
 
                 //if email not existing in user database then create a new username (userX).
                 if (empty($useremail) or $useremail != clean_param($useremail, PARAM_EMAIL)) {
@@ -271,6 +318,8 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                 //get the user - don't bother with auth = googleoauth2 because
                 //authenticate_user_login() will fail it if it's not 'googleoauth2'
                 $user = $DB->get_record('user', array('email' => $useremail, 'deleted' => 0, 'mnethostid' => $CFG->mnet_localhost_id));
+				
+				
 
                 //create the user if it doesn't exist
                 if (empty($user)) {
@@ -278,6 +327,11 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                     // deny login if setting "Prevent account creation when authenticating" is on
                     if($CFG->authpreventaccountcreation) throw new moodle_exception("noaccountyet", "auth_googleoauth2");
 
+					// Check is allowed to create new account
+					if (!$this->can_create_new_account()) {
+						$err = get_string('usernotexist', 'auth_googleoauth2');
+						throw new moodle_exception($err);
+					}
 
                     //get following incremented username
                     $googleuserprefix = core_text::strtolower(get_config('auth/googleoauth2', 'googleuserprefix'));
@@ -506,6 +560,14 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
         }
         if (!isset($config->oauth2displaybuttons)) {
             $config->oauth2displaybuttons = 1;
+        }
+		
+		if (!isset ($config->oauth2authdomain)) {
+            $config->oauth2authdomain = '';
+        }
+		
+		if (!isset ($config->oauth2notcreatenewuser)) {
+            $config->oauth2notcreatenewuser = 0;
         }
 
         echo '<table cellspacing="0" cellpadding="5" border="0">
@@ -794,6 +856,31 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
 
         echo '</td></tr>';
 
+		// Not create new user
+
+        echo '<tr>
+                <td align="right"><label for="oauth2notcreatenewuser">';
+
+        print_string('auth_oauth2notcreatenewuser_key', 'auth_googleoauth2');
+
+        echo '</label></td><td>';
+
+        $checked = empty($config->oauth2notcreatenewuser)?'':'checked';
+        echo html_writer::checkbox('oauth2notcreatenewuser', 1, $checked, '',
+            array('type' => 'checkbox', 'id' => 'oauth2notcreatenewuser', 'class' => 'oauth2notcreatenewuser'));
+
+        if (isset($err["oauth2notcreatenewuser"])) {
+            echo $OUTPUT->error_text($err["oauth2notcreatenewuser"]);
+        }
+
+        echo '</td><td>';
+
+        $code = '<code>&lt;?php require_once($CFG-&gt;dirroot . \'/auth/googleoauth2/lib.php\'); auth_googleoauth2_display_buttons(); ?&gt;</code>';
+        print_string('auth_oauth2notcreatenewuserprefix', 'auth_googleoauth2', $code) ;
+
+        echo '</td></tr>';
+
+		
         // User prefix
 
         echo '<tr>
@@ -840,6 +927,31 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
 
         $code = '<code>&lt;?php require_once($CFG-&gt;dirroot . \'/auth/googleoauth2/lib.php\'); auth_googleoauth2_display_buttons(); ?&gt;</code>';
         print_string('oauth2displaybuttonshelp', 'auth_googleoauth2', $code) ;
+
+        echo '</td></tr>';
+		
+		// Auth Domain 
+		// oauth2authdomain
+		
+		echo '<tr>
+                <td align="right"><label for="oauth2authdomain">';
+
+        print_string('auth_oauth2authdomain_key', 'auth_googleoauth2');
+
+        echo '</label></td><td>';
+
+
+        echo html_writer::empty_tag('input',
+                array('type' => 'text', 'id' => 'oauth2authdomain', 'name' => 'oauth2authdomain',
+                    'class' => 'oauth2authdomain', 'value' => $config->oauth2authdomain));
+
+        if (isset($err["oauth2authdomain"])) {
+            echo $OUTPUT->error_text($err["oauth2authdomain"]);
+        }
+
+        echo '</td><td>';
+
+        print_string('auth_oauth2authdomainprefix', 'auth_googleoauth2') ;
 
         echo '</td></tr>';
 
@@ -906,6 +1018,14 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
         if (!isset ($config->oauth2displaybuttons)) {
             $config->oauth2displaybuttons = 0;
         }
+		
+		if (!isset ($config->oauth2authdomain)) {
+            $config->oauth2authdomain = '';
+        }
+		
+		if (!isset ($config->oauth2notcreatenewuser)) {
+            $config->oauth2notcreatenewuser = 0;
+        }
 
         // save settings
         set_config('googleclientid', $config->googleclientid, 'auth/googleoauth2');
@@ -921,7 +1041,9 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
         set_config('googleipinfodbkey', $config->googleipinfodbkey, 'auth/googleoauth2');
 		set_config('googleuserprefix', core_text::strtolower($config->googleuserprefix), 'auth/googleoauth2');
         set_config('oauth2displaybuttons', $config->oauth2displaybuttons, 'auth/googleoauth2');
-
+		set_config('oauth2displaybuttons', $config->oauth2displaybuttons, 'auth/googleoauth2');
+		set_config('oauth2authdomain', $config->oauth2authdomain, 'auth/googleoauth2');
+		set_config('oauth2notcreatenewuser', $config->oauth2notcreatenewuser, 'auth/googleoauth2');		
         return true;
     }
 

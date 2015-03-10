@@ -67,6 +67,12 @@ $string['auth_messengerclientid'] = 'Your Client ID/Secret can be generated in y
 $string['auth_messengerclientid_key'] = 'Messenger Client ID';
 $string['auth_messengerclientsecret'] = 'See above.';
 $string['auth_messengerclientsecret_key'] = 'Messenger Client secret';
+$string['auth_oauth2authdomain_key'] = 'Restrict Domains';
+$string['auth_oauth2authdomainprefix'] = 'Restrict Domains from which accounts can authenticate or be created.<br />
+Multidomains separated with comma (,)
+<br> example mydomain.xx.com,otherdomain.yy.net';
+$string['auth_oauth2notcreatenewuser_key'] = 'Not to Create New User';
+$string['auth_oauth2notcreatenewuserprefix'] = 'Not allow create new user. Default is false. ';
 
 $string['auth_googlesettings'] = 'Settings';
 $string['couldnotauthenticate'] = 'The authentication failed - Please try to sign-in again.';
@@ -86,3 +92,7 @@ $string['signinwithanaccount'] = 'Log in with:';
 $string['noaccountyet'] = 'You do not have permission to use the site yet. Please contact your administrator and ask them to activate your account.';
 $string['unknownfirstname'] = 'Unknown Firstname';
 $string['unknownlastname'] = 'Unknown Lastname';
+$string['emailnotallowed'] = 'Authentication method error.<br/>
+Please try to login again with UCM email.<br/>';
+$string['usernotexist'] = 'Authentication method error.<br/>
+login not exist.<br/>';
