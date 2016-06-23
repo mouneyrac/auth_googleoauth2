@@ -1,0 +1,3 @@
+[submodule "vendor/pixelfear/oauth2-dropbox"]
+	path = vendor/pixelfear/oauth2-dropbox
+	url = https://github.com/mouneyrac/oauth2-dropbox.git
