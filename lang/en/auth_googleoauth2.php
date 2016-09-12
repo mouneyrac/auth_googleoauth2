@@ -96,6 +96,13 @@ $string['auth_microsoftclientid'] = 'Your Client ID/Secret can be generated at <
 $string['auth_microsoftclientid_key'] = 'Microsoft v2 Application ID';
 $string['auth_microsoftclientsecret'] = '';
 $string['auth_microsoftclientsecret_key'] = 'Microsoft v2 Application secret';
+$string['auth_signonotronclientid'] = 'Information on how to generate the Sign-On-O-Tron Client ID/Secret can be found <a href = "https://github.com/alphagov/signonotron2/blob/master/doc/usage.md" target="_blank">here</a>. Sign-On-O-Tron only accepts HTTPS.
+<br/>Site URL: {$a->siteurl}
+<br/>Site domain: {$a->sitedomain}
+<br/>Valid OAuth redirect URIs: {$a->callbackurl}';
+$string['auth_signonotronclientid_key'] = 'Sign-On-O-Tron Client ID';
+$string['auth_signonotronclientsecret'] = 'See above.';
+$string['auth_signonotronclientsecret_key'] = 'Sign-On-O-Tron Client secret';
 $string['microsoft_failure'] = 'Did not receive an authorization code from the Microsoft servers.';
 $string['auth_googlesettings'] = 'Settings';
 $string['couldnotauthenticate'] = 'The authentication failed - Please try to sign-in again.';
