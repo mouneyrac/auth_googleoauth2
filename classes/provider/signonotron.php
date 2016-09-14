@@ -36,7 +36,8 @@ class provideroauth2signonotron extends Learningpool\OAuth2\Client\Provider\Sign
         parent::__construct([
             'clientId'      => get_config('auth/googleoauth2', $this->name . 'clientid'),
             'clientSecret'  => get_config('auth/googleoauth2', $this->name . 'clientsecret'),
-            'redirectUri'   => $CFG->wwwroot .'/auth/googleoauth2/' . $this->name . '_redirect.php',
+            'redirectUri'   => preg_replace('/http:/',
+                'https:', $CFG->httpswwwroot .'/auth/googleoauth2/' . $this->name . '_redirect.php', 1),
             'scopes'        => $this->scopes
         ]);
     }
