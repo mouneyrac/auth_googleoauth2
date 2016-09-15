@@ -3,16 +3,12 @@
       {
         "type": "vcs",
         "url": "https://github.com/mouneyrac/oauth2-dropbox"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/rlafferty05/oauth2-signonotron"
       }
     ],
     "require": {
         "league/oauth2-client": "^0.12.1",
         "depotwarehouse/oauth2-bnet": "^3.0",
         "pixelfear/oauth2-dropbox": "dev-bugfix",
-        "rlafferty05/oauth2-signonotron": "dev-test"
+        "learningpool/oauth2-signonotron": "dev-master"
     }
 }
