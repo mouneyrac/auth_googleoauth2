@@ -22,7 +22,7 @@ class provideroauth2signonotron extends Learningpool\OAuth2\Client\Provider\Sign
     public $sskstyle = 'signonotron';
     public $name = 'signonotron'; // It must be the same as the XXXXX in the class name provideroauth2XXXXX.
     public $readablename = 'Sign-On-O-Tron';
-    public $scopes = array('email');
+    public $scopes = array();
 
     /**
      * Constructor.
