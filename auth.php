@@ -101,6 +101,10 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
         return false;
     }
 
+    public function postlogout_hook() {
+        redirect(auth_googleoauth2_get_logout_url('ifsta'));
+    }
+
     /**
      * Authentication hook - is called every time user hit the login page
      * The code is run only if the param code is mentionned.
@@ -407,6 +411,9 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                 $PAGE->requires->css('/auth/googleoauth2/style.css');
                 $PAGE->requires->js_init_code("buttonsCodeOauth2 = '$content';");
                 $PAGE->requires->js(new moodle_url($CFG->wwwroot . "/auth/googleoauth2/script.js"));
+            }
+            else {
+                redirect(auth_googleoauth2_get_auth_url('ifsta'));
             }
         }
     }

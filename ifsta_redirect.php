@@ -14,20 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Oauth2 authentication plugin for Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Google/Facebook/Messanger Oauth2 authentication plugin version specification.
- *
- * @package    auth
- * @subpackage googleoauth2
- * @copyright  2012 Jerome Mouneyrac {@link http://www.moodleitandme.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version  = 2016111700;
-$plugin->requires = 2014051200;   // Requires Moodle 2.7 or later.
-$plugin->release = '2.3 (Build: 2016111700)';
-$plugin->maturity = MATURITY_STABLE;             // This version's maturity level.
-$plugin->component = 'auth_googleoauth2'; // Declare the type and name of this plugin.
+require('../../config.php');
+require_once($CFG->dirroot . '/auth/googleoauth2/lib.php');
+googleoauth2_provider_redirect('ifsta');
 

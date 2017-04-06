@@ -75,6 +75,12 @@ $string['auth_googleuserprefix_key'] = 'Username prefix';
 $string['auth_googleoauth2description'] = 'Allow a user to connect to the site with an external authentication provider: Google/Facebook/Windows Live.
 The first time the user connect with an authentication provider, a new account is created.
 Prevent account creation (authpreventaccountcreation admin setting) when authenticating <b>must</b> be unset.';
+$string['auth_ifstaclientid'] = 'Your API/Secret keys are assigned directly by IFSTA developers, please provide them with this information:
+<br/>Website URL: {$a->siteurl}
+<br/>OAuth 2.0 Accept Redirect URL: {$a->callbackurl}';
+$string['auth_ifstaclientid_key'] = 'IFSTA Client ID';
+$string['auth_ifstaclientsecret'] = '';
+$string['auth_ifstaclientsecret_key'] = 'IFSTA Secret';
 $string['auth_linkedinclientid'] = 'Your API/Secret keys can be generated in your <a href="https://www.linkedin.com/secure/developer" target="_blank">Linkedin register application page</a>:
 <br/>Website URL: {$a->siteurl}
 <br/>OAuth 2.0 Accept Redirect URL: {$a->callbackurl}';

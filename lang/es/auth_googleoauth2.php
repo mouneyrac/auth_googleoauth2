@@ -54,6 +54,12 @@ $string['auth_googleoauth2description'] = 'Permite que el usuario pueda conectar
 Evitar la creación de cuentas al identificarse (authpreventaccountcreation) <b>debe</b> estar deshabilitado.
 <br/><br/>
 <i>Aviso acerca de Windows Live: Microsoft no informa sobre la extensión si la dirección de correo ha sido verificado. Más información en el <a href="https://github.com/mouneyrac/auth_googleoauth2/wiki/FAQ">FAQ</a>.</i>';
+$string['auth_ifstaclientid'] = 'Su API / claves secretas son asignados directamente por los desarrolladores de IFSTA, por favor, proporcionarles esta información:
+<br/>RL de página web: {$a->siteurl}
+<br/>OAuth 2.0 Acceptar URL de redirección: {$a->callbackurl}';
+$string['auth_ifstaclientid_key'] = 'IFSTA ID de cliente';
+$string['auth_ifstaclientsecret'] = '';
+$string['auth_ifstaclientsecret_key'] = 'Secreto de IFSTA';
 $string['auth_linkedinclientid'] = 'Tus claves secretas/API pueden ser generados en tu <a href="https://www.linkedin.com/secure/developer">página de registro de Linkedin</a>:
 <br/>URL de página web: {$a->siteurl}
 <br/>OAuth 1.0 Acceptar URL de redirección: {$a->callbackurl}';
