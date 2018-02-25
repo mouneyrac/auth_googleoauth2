@@ -230,7 +230,8 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                             break;
                         case 'github':
                         case 'dropbox':
-                            // As Github/Dropbox doesn't provide firstname/lastname, we'll split the name at the first whitespace.
+                        case 'signonotron':
+                            // As Github/Dropbox/Signonotron doesn't provide firstname/lastname, we'll split the name at the first whitespace.
                             $githubusername = explode(' ', $userdetails->name, 2);
                             $newuser->firstname = $githubusername[0];
                             $newuser->lastname = $githubusername[1];
@@ -645,6 +646,7 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                       [\'Dropbox\', ' . $providerstats->dropbox . ' ],
                       [\'VK\', ' . $providerstats->vk . ' ],
                       [\'Battle.net\', ' . $providerstats->battlenet . ' ],
+                      [\'Sign-On-O-Tron\', ' . $providerstats->signonotron . ' ],
                       [\''.$strothermoodle.'\',    ' . $providerstats->moodle . ' ]
                     ]);
 
@@ -660,7 +662,8 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                         5: { color: \'#007ee5\'},
                         6: { color: \'#45668e\'},
                         7: { color: \'#00B4FF\'},
-                        8: { color: \'#ee7600\'}
+                        8: { color: \'#ee7600\'},
+                        9: { color: \'#c900ad\'}
                       }
                     };
 
@@ -695,6 +698,7 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                              'vk' => 0,
                              'battlenet' => 0,
                              'moodle' => 0,
+                             'signonotron' => 0,
                              'periodindays' => $periodindays);
 
         // Retrieve the provider stats.
