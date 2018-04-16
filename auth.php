@@ -269,6 +269,10 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                     create_user_record($username, '', 'googleoauth2');
                 } else {
                     $username = $user->username;
+                    // To be able to login even if the auth method is different.
+                    $old_authmethod = $user->auth;
+                    $old_password = $user->password;
+                    $DB->set_field('user', 'auth', 'googleoauth2', array('id'=>$user->id));
                 }
 
                 // Authenticate the user.
@@ -277,6 +281,11 @@ class auth_plugin_googleoauth2 extends auth_plugin_base {
                 $userid = empty($user) ? 'new user' : $user->id;
                 oauth_add_to_log(SITEID, 'auth_googleoauth2', '', '', $username . '/' . $useremail . '/' . $userid);
                 $user = authenticate_user_login($username, null);
+                // To be able to login even if the auth method is different.
+                if (isset($old_authmethod)) {
+                    $DB->set_field('user', 'auth', $old_authmethod, array('id'=>$userid));
+                    $DB->set_field('user', 'password', $old_password, array('id'=>$userid));
+                }
                 if ($user) {
 
                     // Set a cookie to remember what auth provider was selected.
